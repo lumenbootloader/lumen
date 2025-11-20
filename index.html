@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lumen – Dual Partition Bootloader</title>
+
+  <!-- Roboto for clean UI -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: #ffffff;
+      color: #222;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      border-bottom: 1px solid #e6e6e6;
+    }
+
+    header .logo {
+      font-weight: 600;
+      font-size: 20px;
+      color: #0057ff;
+    }
+
+    header nav a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #0057ff;
+      font-weight: 500;
+    }
+
+    .hero {
+      padding: 100px 40px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 42px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: #555;
+      max-width: 600px;
+      margin: 0 auto 40px;
+    }
+
+    .hero a {
+      background: #0057ff;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .features {
+      padding: 60px 40px;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .features h2 {
+      color: #0057ff;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .features ul {
+      list-style: none;
+      padding: 0;
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    .purchase {
+      background: #e8f1ff;
+      padding: 60px 40px;
+      text-align: center;
+    }
+
+    .purchase h2 {
+      color: #0057ff;
+      margin-bottom: 10px;
+    }
+
+    .purchase p {
+      margin-bottom: 30px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      border-top: 1px solid #e6e6e6;
+      margin-top: 60px;
+      color: #777;
+    }
+
+    footer a {
+      color: #0057ff;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Lumen</div>
+  <nav>
+    <a href="#features">Features</a>
+    <a href="#purchase">Purchase</a>
+    <a href="mailto:support@yourdomain.com">Support</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Lumen Bootloader</h1>
+  <p>A dual-partition, robust embedded bootloader designed for safe OTA updates and professional deployments.</p>
+  <a href="#purchase">Buy for $25</a>
+</section>
+
+<section id="features" class="features">
+  <h2>Features</h2>
+  <ul>
+    <li>✔ Dual-partition OTA upgrade support</li>
+    <li>✔ Automatic rollback on failure</li>
+    <li>✔ Lightweight and fast boot time</li>
+    <li>✔ Perfect for microcontroller and embedded systems</li>
+  </ul>
+</section>
+
+<section id="purchase" class="purchase">
+  <h2>Get Lumen</h2>
+  <p>Price: <strong>$25</strong><br>
+  Once purchased, your license key will be sent to your email.</p>
+
+  <!-- PayPal SDK -->
+  <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=USD"></script>
+
+  <!-- PayPal Button Container -->
+  <div id="paypal-button-container"></div>
+
+  <script>
+    paypal.Buttons({
+      createOrder: function(data, actions) {
+        return actions.order.create({
+          purchase_units: [{
+            amount: { value: '25.00' },
+            description: "Lumen Bootloader License"
+          }]
+        });
+      },
+
+      onApprove: function(data, actions) {
+        return actions.order.capture().then(function(details) {
+
+          // Redirect to your backend for verification + email delivery
+          const transactionId = details.id;
+          window.location.href =
+            "https://your-vercel-app.vercel.app/api/paypal-complete?transaction=" + transactionId;
+        });
+      },
+
+      onError: function(err) {
+        alert("Payment error occurred. Please try again.");
+        console.error(err);
+      }
+    }).render('#paypal-button-container');
+  </script>
+
+</section>
+
+<footer>
+  © 2025 Lumen. Need help? <a href="mailto:support@yourdomain.com">Contact support</a>.
+</footer>
+
+</body>
+</html>
