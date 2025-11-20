@@ -1,2 +1,2 @@
-# lumen
-# Custom Microcontroller Bootloader
+# Lumen - Custom Microcontroller Bootloader
+
